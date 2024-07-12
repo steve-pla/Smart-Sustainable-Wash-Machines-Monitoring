@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Wash Monitoring Service</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+      <style>
+    .popup {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 20px;
+          background-color: lightgreen;
+          color: white;
+          border-radius: 5px;
+          opacity: 0;
+          transition: opacity 1.5s;
+          z-index: 9999;
+          color: #333; /* Darker text color */
+        }
+
+        .popup-red {
+          background-color: #c0392b;
+        }
+
+        .show {
+          opacity: 1;
+        }
+        .label-frame {
+      background-color: green;
+      padding: 9px;
+      border-radius: 10px;
+      display: inline-block;
+          margin-left: 9px; /* Adjust the margin as needed */
+    }
+
+    .wash-message-label {
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 26px; /* Adjust the font size as needed */
+    }
+
+    .timer {
+      font-size: 38px;
+      color: blue;
+    }
+      </style>
+</head>
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><img src="img/logo.jpg" style="width:50px;"><a href="/">University of the Aegean</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    <div id="popup" class="popup">
+        <h3>ON MY WAY!</h3>
+        <p>1 πλυντήριο έγινε FREE.</p>
+    </div>
+
+        <div id="popup1" class="popup popup-red">
+            <h3>Maybe later..</h3>
+            <p>1 πλυντήριο ξεκίνησε.</p>
+        </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#faq">Frequently Asked Questions</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1>Εφαρμογή Live παρακολούθησης πλυντηρίων στην Φοιτητική Εστία Σάμου</h1>
+          <h2>Live monitoring wash machines</h2>
+        </div>
+      </div>
+
+      <div class="row icon-boxes">
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class=""><i class="ri-stack-line"></i></div>
+             <img src="img/wash_icon.png" alt="Wash 1" style="width:200px;height:200px;">
+             <img src="img/wash_circle.png" class="inner-icon" id="wash-spinner" style="position: absolute; top: 126px; right: 83px; width:95px; height:95px;">
+              <p class="description"><br>Πλυντήριο Νο. 1</p>
+            <div id="LabelFrame1" class="label-frame">
+              <label class="wash-message-label">FREE</label>
+            </div>
+              <div id="timer1" class="timer" style="display: none;"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class=""><i class="ri-stack-line"></i></div>
+             <img src="img/wash_icon.png" alt="Wash 1" style="width:200px;height:200px;">
+              <img src="img/wash_circle.png" class="inner-icon" id="wash-spinner2" style="position: absolute; top: 126px; right: 83px; width:95px; height:95px;">
+            <p class="description"><br>Πλυντήριο Νο. 2</p>
+            <div id="LabelFrame2" class="label-frame">
+              <label class="wash-message-label">FREE</label>
+            </div>
+            <div id="timer2" class="timer" style="display: none;"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class=""><i class="ri-stack-line"></i></div>
+             <img src="https://cdn-icons-png.flaticon.com/512/683/683138.png" alt="Wash 1" style="width:200px;height:200px;">
+            <!--  <h4 class="title"><a href="">Lorem Ipsum</a></h4> -->
+            <p class="description"><br>Πλυντήριο Νο. 3</p>
+            <p class="description"><br><b><p style="color:red;">OUT OF SERVICE..</b></p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </section><!-- End Hero -->
+  <main id="main">
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Παρακάτω, θα βρείτε απαντήσεις σχετικά με ερωτήματα για τη λειτουργία της εφαρμογής.</p>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Το OUT OF SERVICE όταν ένα πλυντήριο χαλάει, το εμφανίζει αυτόματα η εφαρμογή ή πρέπει κάποιος χρήστης να το δηλώσει ; <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  Μέχρι ώρας, το δηλώνει ο δημιουργός της εφαρμογής στατικά.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Χρειάζεται να υπάρχει σύνδεση στο διαδίκτυο για να λειτουργήσει η εφαρμογή ; <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Η εφαρμογή μπορεί να λειτουργήσει κανονικά ακόμη και αν δεν έχει σύνδεση στο Internet.
+                  Επειδή όλα τα δεδομένα δημιουργούνται και στέλνονται σε Raspberry Pi που είναι στο τοπικό
+                  δίκτυο της Εστίας, δεν απαιτείται το Raspberry Pi και το ESP32-MCU να είναι συνδεδεμένα
+                  στο Internet Όμως, επειδή, για την αποστολή email χρειάζεται Internet, η εφαρμογή με κατάλληλο
+                    script, είναι συνδεδεμένη στο Internet συνέχεια.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Μετά από κάποια πτώση ρεύματος, χρειάζεται
+              κάποια ρύθμιση ώστε η εφαρμογή να τρέξει εκ νέου ή γίνεται αυτόματα ;<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Η εφαρμογή είναι ρυθμισμένη με κατάλληλες εντολές ώστε αν οι συσκευές (ESP32, Raspberry Pi)
+                  χάσουν προσωρινά τη τροφοδοσία τους (πχ, πτώση ρεύματος), όταν επανέλθουν να εκτελέσουν κανονικά
+                  την εφαρμογή αυτόματα.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Εδώ, μπορείτε να επικοινωνήσετε με τους δημιουργούς της εφαρμογής για όποια προβλήματα που ενδέχεται να υπάρχουν στην εφαρμογή. Επίσης, όποια ιδέα μπορεί να βελτιώσει την απόδοση και την ασφάλεια της εφαρμογής, είναι καλοδεχούμενη! Σας ευχαριστούμε.</p>
+        </div>
+
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p><a href = "mailto: nrekkas@gmail.com">nrekkas@gmail.com</a></p>
+                <p><a href = "mailto: s.plastras@gmail.com">s.plastras@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+            <form action="/email_action" method="post" role="form" class="php-email-form">
+              <div class="row gy-2 gx-md-3">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group col-12">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                </div>
+                <div class="form-group col-12">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                </div>
+                <div class="text-center col-12"><button type="submit">Send Message</button></div>
+              </div>
+            </form>
+
+            <div>
+              {% if email_status == 1 %}
+                <p style="color: green; width: 100%;"> <strong>Message has been sent!!</strong></p>
+              {% endif %}
+              {% if email_status == -1 %}
+                <p style="color: red; width: 100%;"> <strong>An error occurred ... Try again later.</strong></p>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>Wash Machine Live Monitoring Service</h3>
+            <p>
+              Μια εφαρμογή για τους φοιτητές της Σάμου, όπου σε πραγματικό χρόνο μπορούν να βλέπουν τη λειτουργία των πλυντηρίων.
+              Για την εφαρμογή, έχει αναπτυχθεί ηλεκτρονική πλακέτα με χρήση esp Arduino όπου μετράει το ηλεκτρικό ρεύμα των πλυντηρίων και εν συνεχεία με MQTT πρωτόκολλο, το στέλνει
+              σε ένα web service το οποίο είναι χτισμένο με το framework Python Flask.
+            </p>
+          </div>
+
+          <img src="/img/esp.jpg" alt="esp" style="width:200px;height:200px;">
+          <img src="/img/python.png" alt="Python" style="width:200px;height:200px;">
+          <img src="/img/flask.png" alt="Python" style="width:200px;height:200px;">
+          <img src="/img/mqtt.jpg" alt="Python" style="width:200px;height:200px;">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+  <audio id="wash_free_sound" src="/audio/wash_free_sound.mp3"></audio>
+  <audio id="wash_started_sound" src="/audio/wash_started_sound.mp3"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/3.0.0/mqtt.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+<script>
+function calculateTimeDifference(time) {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const current_time = hours + ':' + minutes + ':' + seconds;
+
+        const date1 = new Date(`2000-01-01T${time}`);
+        const date2 = new Date(`2000-01-01T${current_time}`);
+        // Calculate the difference in milliseconds
+        const diffMilliseconds = Math.abs(date2 - date1);
+        // Convert the difference to hours, minutes, and seconds
+        const diffHours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
+        const diffMinutes = Math.floor((diffMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+        const diffSeconds = Math.floor((diffMilliseconds % (1000 * 60)) / 1000);
+        // Format the difference values as "hh:mm:ss"
+        return `${String(diffHours).padStart(2, '0')}:${String(diffMinutes).padStart(2, '0')}:${String(diffSeconds).padStart(2, '0')}`;
+      }
+      function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return hours + ':' + minutes + ':' + seconds;
+      }
+      function startCountUpTimer1(timeDifference) {
+        let timerInterval;
+        const timerElement = document.getElementById('timer1');
+        //const startTime = Date.now() - timeDifference * 1000; // Convert time difference to milliseconds
+        function updateTimer() {
+          // Convert the time string to a Date object
+          const timeParts = timeDifference.split(":");
+          const dateObj = new Date();
+          dateObj.setHours(parseInt(timeParts[0], 10));
+          dateObj.setMinutes(parseInt(timeParts[1], 10));
+          dateObj.setSeconds(parseInt(timeParts[2], 10));
+          // Increment the time by one second
+          dateObj.setSeconds(dateObj.getSeconds() + 1);
+          // Convert the updated Date object back to the string format
+          const updatedTime = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}:${String(dateObj.getSeconds()).padStart(2, '0')}`;
+          timerElement.textContent = updatedTime;
+          timeDifference = dateObj.toLocaleTimeString([], { hour12: false });
+
+          if (flag1 === 0) {
+            // Clear the interval to stop the timer
+            clearInterval(timerInterval);
+          }
+        }
+        // Update the timer every second
+        timerInterval = setInterval(updateTimer, 1000);
+        // Clear the interval when needed (e.g., when stopping the timer)
+        // clearInterval(timerInterval);
+      }
+      function startCountUpTimer2(timeDifference) {
+        let timerInterval;
+        const timerElement = document.getElementById('timer2');
+        //const startTime = Date.now() - timeDifference * 1000; // Convert time difference to milliseconds
+        function updateTimer() {
+          // Convert the time string to a Date object
+          const timeParts = timeDifference.split(":");
+          const dateObj = new Date();
+          dateObj.setHours(parseInt(timeParts[0], 10));
+          dateObj.setMinutes(parseInt(timeParts[1], 10));
+          dateObj.setSeconds(parseInt(timeParts[2], 10));
+          // Increment the time by one second
+          dateObj.setSeconds(dateObj.getSeconds() + 1);
+          // Convert the updated Date object back to the string format
+          const updatedTime = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}:${String(dateObj.getSeconds()).padStart(2, '0')}`;
+          timerElement.textContent = updatedTime;
+          timeDifference = dateObj.toLocaleTimeString([], { hour12: false });
+
+          if (flag2 === 0) {
+            // Clear the interval to stop the timer
+            clearInterval(timerInterval);
+          }
+        }
+        // Update the timer every second
+        timerInterval = setInterval(updateTimer, 1000);
+        // Clear the interval when needed (e.g., when stopping the timer)
+        // clearInterval(timerInterval);
+      }
+      //BEFORE JS CLIENT CONNECTS TO BROKER, FIRSTLY CALL CHECK API
+      fetch('/check_status', {
+        method: 'GET'
+      })
+        .then(response => response.json())
+              .then(data => {
+                const state1 = data.state1;
+                const state2 = data.state2;
+                const time1 = data.time1;
+                const time2 = data.time2;
+                if (state1) {
+                  document.getElementById("LabelFrame1").style.display = "none";
+                  document.getElementById('wash-spinner').style.animation = 'spin 4s infinite linear';
+                  flag1 = 1;
+                  timeDifference = calculateTimeDifference(time1);
+                  //document.getElementById("timer1").textContent = timeDifference;
+                  document.getElementById("timer1").style.display = "block";
+                  console.log(timeDifference);
+                  startCountUpTimer1(timeDifference);
+                }
+                if (state2) {
+                  document.getElementById("LabelFrame2").style.display = "none";
+                    document.getElementById('wash-spinner2').style.animation = 'spin 4s infinite linear';
+                  flag2 = 1;
+                  timeDifference = calculateTimeDifference(time2);
+                  //document.getElementById("timer2").textContent = timeDifference;
+                  document.getElementById("timer2").style.display = "block";
+                  startCountUpTimer2(timeDifference);
+                }
+              })
+              .catch(error => {
+                console.error('Cannot call Back-end API...');
+              });
+      //===========================================
+      //===========================================
+        // Connect to MQTT broker
+        var client = mqtt.connect('ws://10.10.10.151:9001'); // Replace with your MQTT broker URL
+        // Called when the client is connected
+        client.on('connect', function () {
+            client.subscribe('wash_samos_1/ampere', function (err) {
+            });
+            client.subscribe('wash_samos_2/ampere', function (err) {
+            });
+        });
+
+        let static_counter_complete_wash_1 = 0;
+        let static_counter_complete_wash_1_b = 0
+        let flag1 = 0;
+        let static_counter_complete_wash_2 = 0;
+        let static_counter_complete_wash_2_b = 0
+        let flag2 = 0;
+        function start_wash1_validator(ampere_value) {
+                let val = parseFloat(ampere_value);
+
+                if (val > 0.01 && val <= 0.16) {
+                    if (flag1 === 1) {
+                        if (static_counter_complete_wash_1 === 12) {
+                            flag1 = 0;
+                            static_counter_complete_wash_1 = 0;
+                            document.getElementById("timer1").style.display = "none";
+                            document.getElementById("LabelFrame1").style.display = "block";
+                            document.getElementById('wash-spinner').style.animation = 'none';
+                            showPopup('popup', 'wash_free_sound');
+                        }else {
+                            static_counter_complete_wash_1 += 1;
+                        }
+                    }
+                }
+                if (val >= 0.17) {
+                  if (flag1 === 0) {
+                    if (static_counter_complete_wash_1_b === 5) {
+                      flag1 = 1;
+                      static_counter_complete_wash_1_b = 0;
+                      document.getElementById("LabelFrame1").style.display = "none";
+                      document.getElementById("timer1").style.display = "block";
+                      document.getElementById('wash-spinner').style.animation = 'spin 4s infinite linear';
+                      startCountUpTimer1('00:00:00');
+                      showPopup('popup1', 'wash_started_sound');
+                    } else {
+                      static_counter_complete_wash_1_b += 1;
+                    }
+                  }
+                }
+            }
+          function start_wash2_validator(ampere_value) {
+            let val = parseFloat(ampere_value);
+
+                if (val > 0.01 && val <= 0.16) {
+                    if (flag2 === 1) {
+                        if (static_counter_complete_wash_2 === 12) {
+                            flag2 = 0;
+                            static_counter_complete_wash_2 = 0;
+                            document.getElementById("timer2").style.display = "none";
+                            document.getElementById("LabelFrame2").style.display = "block";
+                            document.getElementById('wash-spinner2').style.animation = 'none';
+                            showPopup('popup', 'wash_free_sound');
+                        }else {
+                            static_counter_complete_wash_2 += 1;
+                        }
+                    }
+                }
+                if (val >= 0.17) {
+                  if (flag2 === 0) {
+                    if (static_counter_complete_wash_2_b === 5) {
+                      flag2 = 1;
+                      static_counter_complete_wash_2_b = 0;
+                      document.getElementById("LabelFrame2").style.display = "none";
+                      document.getElementById("timer2").style.display = "block";
+                      document.getElementById('wash-spinner2').style.animation = 'spin 4s infinite linear';
+                      startCountUpTimer2('00:00:00');
+                      showPopup('popup1', 'wash_started_sound');
+                    } else {
+                      static_counter_complete_wash_2_b += 1;
+                    }
+                  }
+                }
+            }
+        // Called when a message is received
+        client.on('message', function (topic, message) {
+          if (topic === 'wash_samos_1/ampere') {
+            start_wash1_validator(message.toString());
+          } else if (topic === 'wash_samos_2/ampere') {
+            start_wash2_validator(message.toString());
+          }
+        });
+
+function showPopup(id, soundId) {
+      var popup = document.getElementById(id);
+      var audio = document.getElementById(soundId);
+
+      popup.classList.add("show");
+      audio.play();
+
+      setTimeout(function () {
+        popup.classList.remove("show");
+      }, 6000);
+    }
+</script>
+</body>
+</html>

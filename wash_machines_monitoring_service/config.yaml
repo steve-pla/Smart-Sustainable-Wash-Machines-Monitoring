@@ -1,0 +1,22 @@
+mqtt_info:
+  broker:
+    ip: 10.10.10.151
+    port: 1883
+    topics:
+      - name: 'wash_samos_1/ampere'
+        description: 'topic for 1 wash machine'
+      - name: 'wash_samos_2/ampere'
+        description: 'topic for 2 wash machine'
+data_source:
+  mongodb:
+    ip: 10.10.10.151
+    port: 27017
+    db_name: 'wash_db'
+web_info:
+  flask:
+    port: 8000
+email:
+  sender:
+    email_s: 'samoswachsystem@gmail.com'
+    email_s_pass: 'qymmmxeqchdhykku'
+    description_s: 'Enable Google Email App Security Pin first'
