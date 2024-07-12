@@ -120,21 +120,27 @@ Make sure to replace /path/to/main.py with the actual path to your main.py file 
     5. sudo systemctl start wash_app
 ```
 
-## People
+## UserInterface (UI) Pages
+The front-end part includes the main web page with the different UIs. Two screenshots of the web page are depicted below:
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/arch1.png)
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/arch1.png)
+
+
+# People
 Nikos Rekkas, Vasilis Kartitzoglou and Stefanos Plastras, alumni from University of the Aegean, were involved in the design, implementaion, testing and installation of this project.
 
-### Nikos Rekkas
+## Nikos Rekkas
 - Currently, he is working as software engineer in the private sector. He holds a MEng from the Department of Information and Communication Systems Engineering of University of the Aegean.  
 Email: nrekkas@gmail.com  
 Github: [nikosrk](https://github.com/nikosrk)  
 
-### Stefanos Plastras
+## Stefanos Plastras
 - Currently, he is doing his PhD studies in wireless networks. He holds a MEng from Dept. of Information and Communication Systems Engineering and a MSc from Athens University of Economics & Business.  
 Email: s.plastras@gmail.com   
 Github: [stevpla](https://github.com/stevpla)
 
 
-## License
+# License
 The MIT License (MIT)
 
 Copyright (c) 2023 Stefanos Plastras
