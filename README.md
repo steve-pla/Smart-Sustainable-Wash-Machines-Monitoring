@@ -122,8 +122,12 @@ Make sure to replace /path/to/main.py with the actual path to your main.py file 
 
 ## UserInterface (UI) Pages
 The front-end part includes the main web page with the different UIs. Two screenshots of the web page are depicted below:
-![Image Description](wash_machines_monitoring_service/flaskr/static/img/arch1.png)
-![Image Description](wash_machines_monitoring_service/flaskr/static/img/arch1.png)
+Main page showing the wash machines. The inner cycle is dynamically rotating each time the machine is starting while it stops when the machine completes the procedure.
+Also, for these operations, a specific sound is played in order to help better the user realize the modes.<br>
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/main_page.png)
+ <br> <br>
+ Second page:
+![Image Description](wash_machines_monitoring_service/flaskr/static/img/second_page.png)
 
 
 # People
